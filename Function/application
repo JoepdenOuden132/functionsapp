@@ -1,0 +1,19 @@
+using System;
+using Microsoft.Azure.EventGrid.Models;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+
+public static class EventGridFunction
+{
+    [FunctionName("EventGridHandler")]
+    public static void Run(
+        [EventGridTrigger] EventGridEvent eventGridEvent,
+        ILogger log)
+    {
+        log.LogInformation($"Event received: {eventGridEvent.EventType}");
+        
+        // Hier kun je logica toevoegen voor het verwerken van de gebeurtenis
+        // Bijvoorbeeld het doorsturen van de betalingstatus naar een database of andere services
+        log.LogInformation($"Event Data: {eventGridEvent.Data.ToString()}");
+    }
+}

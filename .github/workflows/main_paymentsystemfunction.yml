@@ -37,7 +37,8 @@ jobs:
         shell: bash
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          dotnet build functionsapp.sln --configuration Release --output ./output
+          dotnet restore './functionsapp/Eventgridfuntionapp.csproj'  # Herstelt de afhankelijkheden van het juiste projectbestand
+          dotnet build './functionsapp/Eventgridfuntionapp.csproj' --configuration Release --output ./output  # Bouw het project
           popd
       
       # Stap 5: Login naar Azure met behulp van de Azure-login actie

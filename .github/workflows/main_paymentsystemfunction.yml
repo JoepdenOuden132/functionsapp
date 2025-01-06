@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy dotnet core project to Azure Function App - paymentsystemfunction
+name: Build and deploy .NET Core 3.1 project to Azure Function App - paymentsystemfunction
 
 on:
   push:
@@ -10,31 +7,40 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '8.0.x' # set this to the dotnet version to use
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'  # De rootmap van je project
+  DOTNET_VERSION: '3.1.x'  # Specificeer de juiste .NET versie (3.1.x voor .NET Core 3.1)
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write  # Dit is vereist voor het aanvragen van de JWT
 
     steps:
-      - name: 'Checkout GitHub Action'
+      # Stap 1: Checkout je repository
+      - name: Checkout GitHub Action
         uses: actions/checkout@v4
 
+      # Stap 2: Setup de juiste .NET SDK versie (3.1)
       - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: 'Resolve Project Dependencies Using Dotnet'
+      # Stap 3: Installeer de benodigde Microsoft.NET.Sdk.Functions
+      - name: Install Microsoft.NET.Sdk.Functions
+        run: |
+          dotnet new --install Microsoft.NET.Sdk.Functions::3.0.11
+
+      # Stap 4: Bouw het project
+      - name: Resolve Project Dependencies Using Dotnet
         shell: bash
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build functionsapp.sln --configuration Release --output ./output
           popd
       
+      # Stap 5: Login naar Azure met behulp van de Azure-login actie
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -42,11 +48,11 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
-      - name: 'Run Azure Functions Action'
+      # Stap 6: Deploy naar Azure Function App
+      - name: Run Azure Functions Action
         uses: Azure/functions-action@v1
         id: fa
         with:
-          app-name: 'paymentsystemfunction'
-          slot-name: 'Production'
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-          
+          app-name: 'paymentsystemfunction'  # De naam van je Azure Function App
+          slot-name: 'Production'           # De slotnaam (bijv. Production)
+          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'  # Het pad naar de outputmap na de build

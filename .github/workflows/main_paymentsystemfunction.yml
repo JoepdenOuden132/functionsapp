@@ -33,21 +33,29 @@ jobs:
         shell: bash
 
       - name: Install Azure Functions workload
-        run: dotnet workload install azure-functions
-        shell: bash
-        
-      # Stap 4: Bouw het project
-      - name: Resolve Project Dependencies Using Dotnet
         run: |
-          pushd './application'  
-          dotnet restore './Eventgridfuntionapp.csproj' 
-          dotnet build './Eventgridfuntionapp.csproj' --configuration Release --output ./output
-          popd
-        shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
-        env:
-          AZURE_FUNCTIONAPP_PACKAGE_PATH: .
-          DOTNET_VERSION: 8.0.x
-          DOTNET_ROOT: /home/runner/.dotnet
+          dotnet workload install microsoft-net-sdk-functions --version 8.0.404
+      - name: Restore dependencies
+        run: dotnet restore
+        
+      - name: Build project
+        run: dotnet build --configuration Release --output ./output
+        
+      - name: Publish project
+        run: dotnet publish --configuration Release --output ./publish
+
+      # Stap 4: Bouw het project
+      # - name: Resolve Project Dependencies Using Dotnet
+      #  run: |
+       #   pushd './application'  
+       #   dotnet restore './Eventgridfuntionapp.csproj' 
+       #   dotnet build './Eventgridfuntionapp.csproj' --configuration Release --output ./output
+       #   popd
+      #  shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+      #  env:
+      #    AZURE_FUNCTIONAPP_PACKAGE_PATH: .
+      #    DOTNET_VERSION: 8.0.x
+       #   DOTNET_ROOT: /home/runner/.dotnet
 
       - run: dotnet --info
         shell: bash

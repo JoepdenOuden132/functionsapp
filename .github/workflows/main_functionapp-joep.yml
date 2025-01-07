@@ -20,8 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Ga naar de Paymentprocessor map om dependencies te installeren
-          cd Paymentprocessor
+
           # Verwijs naar de requirements.txt in de root van de repository
           pip install -r ../requirements.txt
 

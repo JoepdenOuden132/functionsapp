@@ -3,4 +3,8 @@
       "version": "8.0.0",
       "rollForward": "latestFeature"
     }
+    ,
+    "msbuild-sdks": {
+    "Microsoft.NET.Sdk.Functions": "4.0.1"
+  }
 }

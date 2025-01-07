@@ -26,9 +26,14 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
       - name: Check .NET Version
         run: dotnet --version
       - run: dotnet --info
+        shell: bash
+
+      - name: Install Azure Functions workload
+        run: dotnet workload install azure-functions
         shell: bash
         
       # Stap 4: Bouw het project

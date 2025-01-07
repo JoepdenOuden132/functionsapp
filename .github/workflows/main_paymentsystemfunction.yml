@@ -36,7 +36,7 @@ jobs:
       - name: Resolve Project Dependencies Using Dotnet
         shell: bash
         run: |
-          pushd './functionsapp'  
+          pushd './functionsapp/functionsapp'  
           dotnet restore './Eventgridfuntionapp.csproj' 
           dotnet build './Eventgridfuntionapp.csproj' --configuration Release --output ./output
           popd

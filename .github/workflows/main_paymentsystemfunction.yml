@@ -32,9 +32,7 @@ jobs:
       - run: dotnet --info
         shell: bash
 
-      - name: Install Azure Functions workload
-        run: |
-          dotnet workload install microsoft-net-sdk-functions --version 8.0.404
+
       - name: Restore dependencies
         run: dotnet restore
         

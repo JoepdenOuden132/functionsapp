@@ -20,13 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # Ga naar de Paymentprocessor map om dependencies te installeren
           cd Paymentprocessor
-          pip install -r ../requirements.txt  # Install dependencies from the root
+          # Verwijs naar de requirements.txt in de root van de repository
+          pip install -r ../requirements.txt
 
-      - name: Build the project (optional)
-        run: |
-          cd Paymentprocessor
-          # Voeg eventueel build stappen toe zoals testen
+
 
       - name: Zip artifact for deployment
         run: |

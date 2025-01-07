@@ -12,7 +12,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+      - name: List files for debug
+        run: |
+          echo "Bestanden in de repository:"
+          ls -al
       - name: Setup Python version
         uses: actions/setup-python@v5
         with:

@@ -28,7 +28,9 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: Check .NET Version
         run: dotnet --version
-
+      - run: dotnet --info
+        shell: bash
+        
       # Stap 4: Bouw het project
       - name: Resolve Project Dependencies Using Dotnet
         run: |

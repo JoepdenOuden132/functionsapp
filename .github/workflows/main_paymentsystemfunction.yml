@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core 3.1 project to Azure Function App - paymentsystemfunction
+name: Build and deploy .NET 7.0 project to Azure Function App - paymentsystemfunction
 
 on:
   push:
@@ -56,4 +56,4 @@ jobs:
         with:
           app-name: 'paymentsystemfunction'  # De naam van je Azure Function App
           slot-name: 'Production'           # De slotnaam (bijv. Production)
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'  # Het pad naar de outputmap na de build
+          package: pushd './application/output'  # Het pad naar de outputmap na de build

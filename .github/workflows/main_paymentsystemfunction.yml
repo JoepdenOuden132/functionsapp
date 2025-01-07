@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           pushd './application'  
-          dotnet restore './Eventgridfuntionapp.csproj' 
+          dotnet restore './Eventgridfuntionapp.csproj' --use-sdk 8.0.404
           dotnet build './Eventgridfuntionapp.csproj' --configuration Release --output ./output
           popd
       

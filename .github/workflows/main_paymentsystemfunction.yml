@@ -41,6 +41,9 @@ jobs:
           AZURE_FUNCTIONAPP_PACKAGE_PATH: .
           DOTNET_VERSION: 8.0.x
           DOTNET_ROOT: /home/runner/.dotnet
+
+      - run: dotnet --info
+        shell: bash
         
       
       # Stap 5: Login naar Azure met behulp van de Azure-login actie

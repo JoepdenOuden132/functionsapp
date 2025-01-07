@@ -31,12 +31,17 @@ jobs:
 
       # Stap 4: Bouw het project
       - name: Resolve Project Dependencies Using Dotnet
-        shell: bash
         run: |
           pushd './application'  
-          dotnet restore './Eventgridfuntionapp.csproj' --use-sdk 8.0.404
+          dotnet restore './Eventgridfuntionapp.csproj' 
           dotnet build './Eventgridfuntionapp.csproj' --configuration Release --output ./output
           popd
+        shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+        env:
+          AZURE_FUNCTIONAPP_PACKAGE_PATH: .
+          DOTNET_VERSION: 8.0.x
+          DOTNET_ROOT: /home/runner/.dotnet
+        
       
       # Stap 5: Login naar Azure met behulp van de Azure-login actie
       - name: Login to Azure

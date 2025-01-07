@@ -21,7 +21,6 @@ jobs:
       - name: Install dependencies
         run: |
 
-          # Verwijs naar de requirements.txt in de root van de repository
           pip install -r ../requirements.txt
 
 

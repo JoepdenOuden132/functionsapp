@@ -21,6 +21,9 @@ jobs:
       - name: Checkout GitHub Action
         uses: actions/checkout@v4
 
+      - name: Set Azure Function App Package Path
+        run: echo "AZURE_FUNCTIONAPP_PACKAGE_PATH=./functionsapp" >> $GITHUB_ENV
+
       # Stap 2: Setup de juiste .NET SDK versie (3.1)
       - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v1
@@ -29,6 +32,9 @@ jobs:
       - name: Check .NET Version
         run: dotnet --version
 
+      - name: Install Azure Functions workload
+        run: |
+          dotnet workload install microsoft-net-sdk-functions
 
       # Stap 4: Bouw het project
       - name: Resolve Project Dependencies Using Dotnet

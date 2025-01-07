@@ -28,6 +28,8 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: Check .NET Version
         run: dotnet --version
+      - name: Install Azure Functions workload
+        run: dotnet workload install azure-functions
 
       # Stap 4: Bouw het project
       - name: Resolve Project Dependencies Using Dotnet

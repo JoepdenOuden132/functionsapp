@@ -1,4 +1,5 @@
 {
+    "scriptFile": "../PaymentProcessor/__init__.py",
     "bindings": [
       {
         "name": "event",

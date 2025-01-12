@@ -23,7 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          cd Paymentprocessor
+          pip install -r ./requirements.txt
 
 
 

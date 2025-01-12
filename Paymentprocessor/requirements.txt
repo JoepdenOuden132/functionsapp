@@ -1,3 +1,2 @@
 azure-functions
-pymysql
 azure-eventgrid

@@ -1,6 +1,8 @@
 import logging
 import json
 import azure.functions as func
+
+
 def main(event: func.EventGridEvent):
     logging.info('Processing event: %s', event.get_json())
     event_data = event.get_json()
@@ -8,6 +10,8 @@ def main(event: func.EventGridEvent):
         process_payment(event_data)
     else:
         logging.error("Invalid event data: no payment_id found")
+
+
 def process_payment(event_data):
     logging.info("Processing payment event data...")
     payment_id = event_data.get('payment_id')

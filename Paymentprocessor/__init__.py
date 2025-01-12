@@ -1,7 +1,6 @@
 import logging
 import json
 import azure.functions as func
-import pymysql
 
 def main(event: func.EventGridEvent):
     logging.info('Processing event: %s', event.get_json())

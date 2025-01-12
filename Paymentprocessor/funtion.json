@@ -1,11 +1,18 @@
 {
     "scriptFile": "../PaymentProcessor/__init__.py",
-    "bindings": [
-      {
-        "name": "event",
-        "type": "eventGridTrigger",
-        "direction": "in",
-        "eventSubscriptionName": "payment-events"
-      }
-    ]
-  }
+      "bindings": [
+        {
+          "name": "event",                             
+          "type": "eventGridTrigger",                  
+          "direction": "in",                          
+          "eventSubscriptionName": "payment-events",   
+          "eventGridEvent": {                          
+            "topic": "string",
+            "eventTime": "string",
+            "eventType": "string",
+            "data": "string",                         
+            "dataVersion": "string"
+          }
+        }
+      ]
+    }

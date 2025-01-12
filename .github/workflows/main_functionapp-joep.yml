@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd Paymentprocessor
-          pip install -r ./requirements.txt
+          pip install --no-cache-dir -r ./requirements.txt
 
 
 
